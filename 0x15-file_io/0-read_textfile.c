@@ -20,6 +20,7 @@ ssize_t read_textfile(const char *filename, size_t letters)
         return (count);
     count = read(file_d, buf, letters);
     count = write(STDOUT_FILENO, buf, count);
+    close(file_d);
     return (count);
 
     
