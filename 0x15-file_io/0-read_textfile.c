@@ -9,25 +9,17 @@
 */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-    int file_d, n;
-    char buf[1024];
+    int file_d;
+    char buf[2048];
     ssize_t count = 0;
 
+    if (!filename || !letters)
+		return (count);
     file_d = open(filename, O_RDONLY);
     if (file_d == -1)
-        return;
-    while(letters--)
-    {
-        n = read(file_d, buf, 1);
-        if (n == 0)
-        {
-            count++;
-            return (count);
-        }
-        write(STDOUT_FILENO, buf, 1);
-        count++;
-
-    }
+        return (count);
+    count = read(file_d, buf, letters);
+    count = write(STDOUT_FILENO, buf, count);
     return (count);
 
     
