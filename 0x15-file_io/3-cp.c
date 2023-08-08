@@ -33,7 +33,7 @@ int main(int ac, char **av)
 		dprintf(STDERR_FILENO, ERR_WRITE, av[2]);
 		exit(99);
 	}
-	while ((n = read(file_from_d, buffer, 10)) > 0)
+	while ((n = read(file_from_d, buffer, 1024)) > 0)
 		if (write(file_to_d, buffer, n) < n)
 		{
 			dprintf(STDERR_FILENO, ERR_WRITE, av[2]);
