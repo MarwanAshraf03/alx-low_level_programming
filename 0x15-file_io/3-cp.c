@@ -39,6 +39,11 @@ int main(int ac, char **av)
 			dprintf(STDERR_FILENO, ERR_WRITE, av[2]);
 			exit(99);
 		}
+	if (n == -1)
+	{
+		dprintf(STDERR_FILENO, ERR_READ, av[1]);
+		exit(98);
+	}
 	file_from_d = close(file_from_d);
 	file_to_d = close(file_to_d);
 	if ((file_from_d == -1) | (file_to_d == -1))
