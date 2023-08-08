@@ -25,27 +25,23 @@ int main(int ac, char **av)
 	file_from_d = open(av[1], O_RDONLY);
 	if (file_from_d == -1)
 	{
-		dprintf(STDERR_FILENO, ERR_READ, av[1]);
-		exit(98);
+		dprintf(STDERR_FILENO, ERR_READ, av[1]), exit(98);
 	}
 	file_to_d = open(av[2], (O_WRONLY | O_TRUNC | O_CREAT), PERMS);
 	if (file_to_d == -1)
 	{
-		dprintf(STDERR_FILENO, ERR_WRITE, av[2]);
-		exit(99);
+		dprintf(STDERR_FILENO, ERR_WRITE, av[2]), exit(99);
 	}
 	while ((n = read(file_from_d, buffer, 10)) > 0)
 		if (write(file_to_d, buffer, n) < n)
 		{
-			dprintf(STDERR_FILENO, ERR_WRITE, av[2]);
-			exit(99);
+			dprintf(STDERR_FILENO, ERR_WRITE, av[2]), exit(99);
 		}
 	file_from_d = close(file_from_d);
 	file_to_d = close(file_to_d);
 	if ((file_from_d == -1) | (file_to_d == -1))
 	{
-		dprintf(STDERR_FILENO, ERR_CLOSE, file_from_d);
-		exit(100);
+		dprintf(STDERR_FILENO, ERR_CLOSE, file_from_d), exit(100);
 	}
 	return (0);
 }
