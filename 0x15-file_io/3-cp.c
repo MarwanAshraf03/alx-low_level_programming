@@ -19,8 +19,7 @@ int main(int ac, char **av)
 
 	if (ac != 3)
 	{
-		dprintf(STDERR_FILENO, USAGE);
-		exit(97);
+		dprintf(STDERR_FILENO, USAGE), exit(97);
 	}
 	file_from_d = open(av[1], O_RDONLY);
 	if (file_from_d == -1)
@@ -32,6 +31,7 @@ int main(int ac, char **av)
 	{
 		dprintf(STDERR_FILENO, ERR_WRITE, av[2]), exit(99);
 	}
+	printf("from: %d, to: %d\n", file_from_d, file_to_d);
 	while ((n = read(file_from_d, buffer, 10)) > 0)
 		if (write(file_to_d, buffer, n) < n)
 		{
