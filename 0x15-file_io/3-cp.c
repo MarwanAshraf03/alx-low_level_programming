@@ -4,7 +4,6 @@
 #define ERR_WRITE "Error: Can't write to %s\n"
 #define ERR_READ "Error: Can't read from file %s\n"
 #define ERR_CLOSE "Error: Can't close fd %d\n"
-#define PERMS 0664
 
 /**
  * main - copies content of file to other one
@@ -28,7 +27,7 @@ int main(int ac, char **av)
 		dprintf(STDERR_FILENO, ERR_READ, av[1]);
 		exit(98);
 	}
-	file_to_d = open(av[2], (O_WRONLY | O_TRUNC | O_CREAT), PERMS);
+	file_to_d = open(av[2], (O_WRONLY | O_TRUNC | O_CREAT), 0664);
 	if (file_to_d == -1)
 	{
 		dprintf(STDERR_FILENO, ERR_WRITE, av[2]);
