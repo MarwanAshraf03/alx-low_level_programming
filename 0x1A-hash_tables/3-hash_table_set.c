@@ -30,6 +30,7 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		ht->array[index] = ht_node;
 		return (1);
 	}
+	printf("33\n");
 	while (head)
 	{
 		if (!strcmp(key, head->key))
