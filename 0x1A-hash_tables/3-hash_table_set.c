@@ -1,5 +1,29 @@
 #include "hash_tables.h"
 /**
+ * instantiate_node - returns node
+ * @key: key of node
+ * @value: value of node
+ * Return: pointer to the new node
+*/
+hash_node_t *instantiate_node(const char *key, const char *value)
+{
+	hash_node_t *h_node;
+
+	h_node = (hash_node_t *) malloc(sizeof(hash_node_t));
+	if (!h_node)
+		return (0);
+	h_node->key = strdup(key);
+	h_node->value = strdup(value);
+	if (!h_node->key || !h_node->value)
+	{
+		free(h_node);
+		free(h_node->key);
+		free(h_node->value);
+		return (NULL);
+	}
+	return (h_node);
+}
+/**
  * hash_table_set - adds element to hash table
  * @ht: hash table
  * @key: key of value
@@ -8,31 +32,24 @@
 */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	hash_node_t *head, *ht_node;
-	unsigned long int index;
+	hash_node_t *head, *ret;
+	unsigned long int idx;
 
-	if (!ht || !value || !key || !*key)
+	if (!ht || !*key || !key || !value)
 		return (0);
-	ht_node = (hash_node_t *) malloc(sizeof(hash_node_t));
-	if (!ht_node)
-		return (0);
-	ht_node->key = strdup(key);
-	if (!ht_node->key)
-		return (0);
-	ht_node->next = NULL;
-	index = key_index((unsigned const char *)key, ht->size);
-	head = ht->array[index];
-	if (!head)
+	idx = key_index((unsigned const char *)key, ht->size);
+	if (!ht->array[idx])
 	{
-		ht_node->value = strdup(value);
-		if (!ht_node->value)
+		ret = instantiate_node(key, value);
+		if (!ret)
 			return (0);
-		ht->array[index] = ht_node;
+		ht->array[idx] = ret;
 		return (1);
 	}
+	head = ht->array[idx];
 	while (head)
 	{
-		if (!strcmp(key, head->key))
+		if (!strcmp(head->key, key))
 		{
 			free(head->value);
 			head->value = strdup(value);
@@ -42,10 +59,10 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		}
 		head = head->next;
 	}
-	ht_node->value = strdup(value);
-	if (!ht_node->value)
+	ret = instantiate_node(key, value);
+	if (!ret)
 		return (0);
-	ht_node->next = ht->array[index];
-	ht->array[index]->next = ht_node;
+	ret->next = ht->array[idx];
+	ht->array[idx] = ret;
 	return (1);
 }
