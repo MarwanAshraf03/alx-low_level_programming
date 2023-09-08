@@ -16,10 +16,10 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	ht_node = (hash_node_t *) malloc(sizeof(hash_node_t));
 	if (!ht_node)
 		return (0);
-	strcpy(ht_node->key, key);
-	strcpy(ht_node->value, value);
+	ht_node->key = strdup(key);
+	ht_node->value = strdup(value);
 	ht_node->next = NULL;
-	index = key_index(key, ht->size);
+	index = key_index((unsigned const char *)key, ht->size);
 	if (!ht->array[index])
 	{
 		ht->array[index] = ht_node;
