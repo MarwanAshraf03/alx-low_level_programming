@@ -14,8 +14,6 @@ if __name__ == "__main__":
     # ]
     grid = [
         [1, 1, 1, 0],
-        [1, 1, 1, 1],
-        [1, 1, 1, 1]
     ]
     prm = island_perimeter(grid)
     print(50 * "-")
