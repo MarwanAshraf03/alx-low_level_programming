@@ -13,3 +13,4 @@ fclean:
 	$(RM) *~ school
 	$(RM) main.o school.o
 re: fclean all
+
