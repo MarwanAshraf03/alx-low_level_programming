@@ -39,9 +39,9 @@ def island_perimeter(grid):
                     add *= 4
                     try:
                         if grid[i][j-1] == 1:
-                            add -= 1
+                                add -= 1
                         if grid[i-1][j] == 1:
-                            add -= 1
+                                add -= 1
                         if grid[i][j+1] == 1:
                             add -= 1
                         if grid[i+1][j] == 1:
