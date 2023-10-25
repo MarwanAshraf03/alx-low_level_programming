@@ -2,14 +2,14 @@ CC=gcc
 SRC=main.c school.c
 NAME=school
 OBJ= $(SRC:.c=.o)
-.PHONY: re
+RM= rm -f
 all: $(OBJ)
 	$(CC) $(OBJ) -o $(NAME)
 clean:
-	rm -f *~ school
+	$(RM) *~ school
 oclean:
-	rm -f  main.o school.o
+	$(RM)  main.o school.o
 fclean:
-	rm -f *~ school
-	rm -f main.o school.o
+	$(RM) *~ school
+	$(RM) main.o school.o
 re: fclean all
