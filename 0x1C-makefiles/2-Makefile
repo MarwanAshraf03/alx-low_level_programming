@@ -4,3 +4,5 @@ NAME=school
 OBJ
 all:OBJ
 	$(CC) main.o school.o -o $(NAME)
+main.c: main.c
+	gcc -c main.c
