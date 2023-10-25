@@ -13,6 +13,8 @@ if __name__ == "__main__":
     #     [0, 0, 0, 0, 0, 0]
     # ]
     grid = [
-        [1]
+        [0, 1, 1, 0]
     ]
-    print(island_perimeter(grid))
+    prm = island_perimeter(grid)
+    print(50 * "-")
+    print(prm)
