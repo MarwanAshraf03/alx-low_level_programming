@@ -10,6 +10,11 @@ def island_perimeter(grid):
     """
     perimeter = 0
     add = 0
+    sumofsums = 0
+    for i in grid:
+        sumofsums += sum(i)
+    if sumofsums == len(grid) * len(grid[0]):
+        return sumofsums
     if len(grid) == 1 and len(grid[0]) == 1 and grid[0][0]:
         return 4
     if len(grid) == 1:
@@ -19,8 +24,11 @@ def island_perimeter(grid):
                 add *= 4
                 try:
                     if grid[0][j-1] == 1:
+                        if j-1 == -1:
+                            continue
                         add -= 1
                     if grid[0][j+1] == 1:
+                        # if j+1
                         add -= 1
                 except IndexError:
                     pass
