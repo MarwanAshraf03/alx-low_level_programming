@@ -24,11 +24,9 @@ def island_perimeter(grid):
                 add *= 4
                 try:
                     if grid[0][j-1] == 1:
-                        if j-1 == -1:
-                            continue
-                        add -= 1
+                        if j != 0:
+                            add -= 1
                     if grid[0][j+1] == 1:
-                        # if j+1
                         add -= 1
                 except IndexError:
                     pass
